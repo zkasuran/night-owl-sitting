@@ -228,3 +228,12 @@ export const sitterRunHousekeeping = createServerFn({ method: "POST" })
     await m.housekeeping();
     return dispatchDueEmails();
   });
+
+/** Public: makes sure the shared demo sitter account exists (confirmed) so judges can sign in in one tap. */
+export const ensureDemoSitter = createServerFn({ method: "POST" }).handler(async (): Promise<{ ok: true }> => {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const email = "robin@nightowlsitting.demo";
+  const { error } = await supabaseAdmin.auth.admin.createUser({ email, password: "lamp-in-the-window", email_confirm: true });
+  if (error && !/already|registered|exists/i.test(error.message)) throw new Error(error.message);
+  return { ok: true };
+});

@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { claimSitterAccess, getDashboard, sitterCancelBooking, sitterRunHousekeeping, type Dashboard, type TimelineSit } from "@/lib/sitter.functions";
+import { ensureDemoSitter, claimSitterAccess, getDashboard, sitterCancelBooking, sitterRunHousekeeping, type Dashboard, type TimelineSit } from "@/lib/sitter.functions";
 import { dollars, rate } from "@/lib/money";
 import { clock, dateTime, eveningShort, relativeTime, timeRange, weekdayLong, weekendHeading, weekendSpan } from "@/lib/time";
 import { Button } from "@/components/ui/button";
@@ -104,6 +104,7 @@ function LoginCard() {
   async function demo() {
     setBusy("demo");
     setError(null);
+    try { await ensureDemoSitter(); } catch { /* sign-in below reports any real problem */ }
     const { error } = await supabase.auth.signInWithPassword(DEMO_SITTER);
     if (error) setError(error.message);
     setBusy("none");
