@@ -1,0 +1,290 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Night Owl Sitting Co. design system
+ * "A warm lamp in a calm night house."
+ *
+ * Indigo night surfaces, one warm gold accent, Fraunces for the voice,
+ * Inter for the body. Every color lives here as an oklch token.
+ */
+
+@theme inline {
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-ink: var(--gold-ink);
+  --color-night-deep: var(--night-deep);
+  --color-night-raised: var(--night-raised);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lamp: var(--shadow-lamp);
+  --shadow-card: var(--shadow-card);
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.5s ease-out both;
+  --animate-lamp-pulse: lamp-pulse 3.2s ease-in-out infinite;
+  --animate-check-pop: check-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-ring-out: ring-out 0.9s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes lamp-pulse {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.06);
+    }
+  }
+  @keyframes check-pop {
+    0% {
+      transform: scale(0.4);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.12);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes ring-out {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 55%, transparent);
+    }
+    100% {
+      box-shadow: 0 0 0 22px color-mix(in oklab, var(--gold) 0%, transparent);
+    }
+  }
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Night surfaces (user-specified palette) */
+  --night-deep: oklch(0.1858 0.0294 271.15); /* #0E1220 */
+  --night-raised: oklch(0.2263 0.0318 272.87); /* #171B2B */
+  --background: var(--night-deep);
+  --foreground: oklch(0.9495 0.0055 274.96); /* #EDEEF2 */
+  --card: var(--night-raised);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.2263 0.0318 272.87);
+  --popover-foreground: var(--foreground);
+
+  /* One warm gold accent */
+  --gold: oklch(0.7946 0.1329 80.51); /* #E8B24C */
+  --gold-ink: oklch(0.2154 0.01 248.29); /* #161A1E */
+  --gold-soft: color-mix(in oklab, var(--gold) 12%, transparent);
+  --primary: var(--gold);
+  --primary-foreground: var(--gold-ink);
+
+  --secondary: oklch(0.2926 0.0337 272.2); /* #262B3D */
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.2926 0.0337 272.2);
+  --muted-foreground: oklch(0.7061 0.0243 269.34); /* #9AA0B0 */
+  --accent: color-mix(in oklab, var(--gold) 10%, var(--night-raised));
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.6407 0.1776 27.61);
+  --destructive-foreground: var(--foreground);
+  --success: oklch(0.6538 0.1324 163.86);
+  --success-foreground: var(--foreground);
+  --border: oklch(0.2926 0.0337 272.2); /* #262B3D */
+  --input: oklch(0.2926 0.0337 272.2);
+  --ring: var(--gold);
+
+  --chart-1: var(--gold);
+  --chart-2: oklch(0.7061 0.0243 269.34);
+  --chart-3: oklch(0.6538 0.1324 163.86);
+  --chart-4: oklch(0.55 0.05 272);
+  --chart-5: oklch(0.85 0.08 80);
+
+  --sidebar: var(--night-raised);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--gold);
+  --sidebar-primary-foreground: var(--gold-ink);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--gold);
+
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.25), 0 12px 32px -12px oklch(0 0 0 / 0.55);
+  --shadow-card: 0 1px 0 color-mix(in oklab, var(--foreground) 4%, transparent) inset,
+    0 18px 40px -20px oklch(0 0 0 / 0.6);
+  --shadow-lamp: 0 0 0 1px color-mix(in oklab, var(--gold) 35%, transparent),
+    0 10px 40px -8px color-mix(in oklab, var(--gold) 45%, transparent);
+
+  --gradient-lamp: radial-gradient(
+    ellipse 70% 55% at 50% 0%,
+    color-mix(in oklab, var(--gold) 22%, transparent),
+    transparent 70%
+  );
+  --gradient-gold: linear-gradient(
+    135deg,
+    var(--gold),
+    color-mix(in oklab, var(--gold) 82%, oklch(0.95 0.06 85))
+  );
+}
+
+.dark {
+  --background: var(--night-deep);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--gold) 35%, transparent);
+  }
+}
+
+@utility night-sky {
+  background-color: var(--night-deep);
+  background-image: var(--gradient-lamp);
+}
+
+@utility lamp-glow {
+  box-shadow: var(--shadow-lamp);
+}
+
+@utility card-night {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-card);
+}
+
+@utility gold-text {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility skeleton-night {
+  background: linear-gradient(
+    90deg,
+    var(--secondary) 0%,
+    color-mix(in oklab, var(--secondary) 70%, var(--card)) 50%,
+    var(--secondary) 100%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+  border-radius: var(--radius-md);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
